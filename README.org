@@ -1,6 +1,5 @@
 * 言語処理100本ノック version Julia
-[[http://www.cl.ecei.tohoku.ac.jp/nlp100/
-][言語処理100本ノック]]
+[[http://www.cl.ecei.tohoku.ac.jp/nlp100/][言語処理100本ノック]
 
 ** chapter1
 *** 00.文字列の逆順
@@ -57,5 +56,3 @@ for i = 1:length(data)
 end
 println(d)
 #+END_SRC
-
-
