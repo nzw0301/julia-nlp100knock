@@ -9,3 +9,53 @@
 s = "stressed"
 println(reverse(s))
 #+END_SRC
+
+*** 01.「パタトクカシーー」
+
+#+BEGIN_SRC julia
+const str = split("パタトクカシーー","")
+
+for i in 1:length(str)
+    if isodd(i)
+      print(str[i])
+    end
+  end
+println()
+#+END_SRC
+
+*** 02.「パトカー」＋「タクシー」＝「パタトクカシーー」
+
+#+BEGIN_SRC julia
+const a = split("パトカー","")
+const b = split("タクシー","")
+
+for i in 1:length(a)
+  print(a[i]*b[i])
+end
+println("")
+#+END_SRC
+
+*** 03.円周率
+
+#+BEGIN_SRC julia
+map(x->print(length(x)),split(replace("Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics.",r",|\.", "")))
+#+END_SRC
+
+*** 04.元素記号
+
+#+BEGIN_SRC julia
+const data = split("Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can.")
+d = Dict()
+const f = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+
+for i = 1:length(data)
+  if i in f
+    d[data[i][1]] = i
+  else
+    d[data[i][1:2]] = i
+  end
+end
+println(d)
+#+END_SRC
+
+
