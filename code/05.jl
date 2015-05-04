@@ -14,16 +14,3 @@ function ngram_array(sequence ,n::Int64)
   end
   ngrams
 end
-
-const str1 = "I am an NLPer"
-const str2 = "ヘリウムは少年です"
-const n = 2
-
-println(ngram_char(str1, n))
-println(ngram_char(str2, n))
-
-const str1_ary = split(str1)
-const str2_ary = ["ヘリウム", "は", "少年", "です"]
-
-println(ngram_array(str1_ary,n))
-println(ngram_array(str2_ary,n))

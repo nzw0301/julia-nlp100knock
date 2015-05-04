@@ -79,17 +79,46 @@ function ngram_array(sequence ,n::Int64)
   ngrams
 end
 
-const str1 = "I am an NLPer"
-const str2 = "ヘリウムは少年です"
-const n = 2
+str1 = "I am an NLPer"
+str2 = "ヘリウムは少年です"
+n = 2
 
 println(ngram_char(str1, n))
 println(ngram_char(str2, n))
 
-const str1_ary = split(str1)
-const str2_ary = ["ヘリウム", "は", "少年", "です"]
+str1_ary = split(str1)
+str2_ary = ["ヘリウム", "は", "少年", "です"]
 
 println(ngram_array(str1_ary,n))
 println(ngram_array(str2_ary,n))
+#+END_SRC
 
+*** 06.集合
+
+05.jlには，05.n-gramの関数のみが定義されているとします．
+
+#+BEGIN_SRC julia
+include("05.jl")
+
+str1 = "paraparaparadise"
+str2 = "paragraph"
+n = 2
+
+x = Set(ngram_char(str1,2))
+y = Set(ngram_char(str2,2))
+
+println(union(x, y))
+println(intersect(x, y))
+println(setdiff(x, y))
+
+println(in("se", x))
+println(in("se", y))
+#+END_SRC
+
+*** 07.テンプレートによる生成
+
+#+BEGIN_SRC julia
+getTemplate(x,y,z) =  string(x) * "時の" * string(y) * "は" * string(z)
+
+println(getTemplate(12,"気温",22.4))
 #+END_SRC
