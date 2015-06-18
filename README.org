@@ -122,3 +122,23 @@ getTemplate(x,y,z) =  string(x) * "時の" * string(y) * "は" * string(z)
 
 println(getTemplate(12,"気温",22.4))
 #+END_SRC
+
+*** 08.暗号文
+クラスがcharかStringでいろいろとめんどうで複雑な感じになってますが．．．(ほかにいいやり方があったら知りたい．．．)
+複合化は略...
+#+BEGIN_SRC julia
+function chipher(str) 
+  result = ""
+  for i in  1:length(str)
+    if ismatch(r"[0-9A-Za-z]", str[i:i])
+      result *= string(219 - int(str[i]))
+    else
+      result *= str[i:i]
+    end
+  end
+  result
+end
+
+println(chipher("Today is a good day to die"))
+#+END_SRC
+
