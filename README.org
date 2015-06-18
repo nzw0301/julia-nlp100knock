@@ -1,7 +1,7 @@
 * 言語処理100本ノック version Julia
 [[http://www.cl.ecei.tohoku.ac.jp/nlp100/][言語処理100本ノック]]
 
-09までやりました(2015/06/18)
+10までやりました(2015/06/19)
 
 ** chapter1
 *** 00.文字列の逆順
@@ -163,4 +163,13 @@ str2 = "I couldn't believe that I could actually understand what I was reading :
 
 println(shuffle_sentence(str1))
 println(shuffle_sentence(str2))
+#+END_SRC
+
+** chapter2
+*** 10. 行数のカウント
+example.txtは10.jlと同じ階層にあるテキストファイル(codeの中にあるデータは，ALICE'S ADVENTURES
+IN WONDERLANDの第1章)
+#+BEGIN_SRC julia
+f = open("example.txt")
+println(length(readlines(f)))
 #+END_SRC
