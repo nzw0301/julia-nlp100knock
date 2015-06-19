@@ -1,2 +1,2 @@
-f = open("example.txt")
+f = open("hightemp.txt")
 println(length(readlines(f)))
