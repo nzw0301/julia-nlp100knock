@@ -168,7 +168,7 @@ println(shuffle_sentence(str2))
 ** chapter2
 *** 10. 行数のカウント
 #+BEGIN_SRC julia
-f = open("example.txt")
+f = open("hightemp.txt")
 println(length(readlines(f)))
 #+END_SRC
 
