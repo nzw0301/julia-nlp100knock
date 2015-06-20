@@ -206,7 +206,13 @@ end
 #+END_SRC
 
 *** 14. 先頭からN行を出力
-$ julia 14.jl n
+$ haed -n 5 hightemp.txt
+
+と
+
+$ julia 14.jl 5
+
+が同じ
 #+BEGIN_SRC julia
 f = open("hightemp.txt")
 n = int(ARGS[1])
@@ -216,5 +222,16 @@ while i <= n && !eof(f)
   l = readline(f)
   print(l)
   i += 1
+end
+#+END_SRC
+
+*** 17. １列目の文字列の異なり
+#+BEGIN_SRC julia
+pref = Set()
+
+f = open("hightemp.txt", "r")
+for line in readlines(f)
+  col1 = split(line, "\t")[1]
+  push!(pref,col1)
 end
 #+END_SRC
