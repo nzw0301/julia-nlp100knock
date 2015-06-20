@@ -207,12 +207,9 @@ end
 
 *** 14. 先頭からN行を出力
 $ haed -n 5 hightemp.txt
-
 と
-
 $ julia 14.jl 5
-
-が同じ
+は同じ
 #+BEGIN_SRC julia
 f = open("hightemp.txt")
 n = int(ARGS[1])
@@ -225,7 +222,7 @@ while i <= n && !eof(f)
 end
 #+END_SRC
 
-*** 17. １列目の文字列の異なり
+*** 17. 1列目の文字列の異なり
 #+BEGIN_SRC julia
 pref = Set()
 
