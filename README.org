@@ -1,7 +1,7 @@
 * 言語処理100本ノック version Julia
   [[http://www.cl.ecei.tohoku.ac.jp/nlp100/][言語処理100本ノック]]
 
-  11までやりました(2015/06/19)
+  13までやりました(2015/06/20)
 
 ** chapter1
 *** 00.文字列の逆順
@@ -187,8 +187,20 @@ f = open("hightemp.txt")
 col1 = open("col1.txt","w")
 col2 = open("col2.txt","w")
 for line in readlines(f)
-  col = split(chomp(line), "\t")        
+  col = split(chomp(line), "\t")
   println(col1,col[1])
   println(col2,col[2])
+end
+#+END_SRC
+
+*** 13. col1.txtとcol2.txtをマージ
+#+BEGIN_SRC julia
+col1 = open("col1.txt")
+col2 = open("col2.txt")
+merge = open("merge.txt", "w")
+for line in readlines(col1)
+  c1 = chomp(line)
+  c2 = chomp(readline(col2))
+  println(merge, join([c1,c2], "\t"))
 end
 #+END_SRC
