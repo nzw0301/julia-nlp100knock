@@ -232,3 +232,15 @@ for line in readlines(f)
   push!(pref,col1)
 end
 #+END_SRC
+
+
+*** 18. 各行を3コラム目の数値の降順にソート
+DataFrameを使ってるのでちょっと遅いです．．．
+型が揃えられるので，実は題意を満たせてない
+#+BEGIN_SRC julia
+using DataFrames
+
+f =  readtable("hightemp.txt", separator = '\t', header = false)
+sort!(f, cols = :x3, rev = true)
+println(f)
+#+END_SRC
