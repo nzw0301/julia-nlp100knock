@@ -6,6 +6,6 @@ if n > filelength
 end
 s = filelength - n + 1
 
-for i in s:filelength
-  print(f[i])
+for l in f[s:filelength]
+  print(l)
 end

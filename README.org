@@ -1,7 +1,7 @@
 * 言語処理100本ノック version Julia
   [[http://www.cl.ecei.tohoku.ac.jp/nlp100/][言語処理100本ノック]]
 
-  14までやりました(2015/06/20)
+  18までやりました(2015/06/25)
 
 ** chapter1
 *** 00.文字列の逆順
@@ -10,6 +10,7 @@
 s = "stressed"
 println(reverse(s))
 #+END_SRC
+
 
 *** 01.「パタトクカシーー」
 
@@ -24,6 +25,7 @@ for i in 1:length(str)
 println()
 #+END_SRC
 
+
 *** 02.「パトカー」＋「タクシー」＝「パタトクカシーー」
 
 #+BEGIN_SRC julia
@@ -36,11 +38,13 @@ end
 println("")
 #+END_SRC
 
+
 *** 03.円周率
 
 #+BEGIN_SRC julia
 map(x->print(length(x)),split(replace("Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics.",r",|\.", "")))
 #+END_SRC
+
 
 *** 04.元素記号
 
@@ -59,8 +63,8 @@ end
 println(d)
 #+END_SRC
 
-*** 05.n-gram
 
+*** 05.n-gram
 問題は英語表記だけど，2バイト文字にも対応するために，日本語の例を加えました．
 
 #+BEGIN_SRC julia
@@ -95,8 +99,8 @@ println(ngram_array(str1_ary,n))
 println(ngram_array(str2_ary,n))
 #+END_SRC
 
-*** 06.集合
 
+*** 06.集合
 05.jlには，05.n-gramの関数のみが定義されているとします．
 
 #+BEGIN_SRC julia
@@ -117,13 +121,14 @@ println(in("se", x))
 println(in("se", y))
 #+END_SRC
 
-*** 07.テンプレートによる生成
 
+*** 07.テンプレートによる生成
 #+BEGIN_SRC julia
 getTemplate(x,y,z) =  string(x) * "時の" * string(y) * "は" * string(z)
 
 println(getTemplate(12,"気温",22.4))
 #+END_SRC
+
 
 *** 08.暗号文
 クラスがcharかStringでいろいろとめんどうで複雑な感じになってますが．．．(ほかにいいやり方があったら知りたい．．．)
@@ -143,6 +148,7 @@ end
 
 println(chipher("Today is a good day to die"))
 #+END_SRC
+
 
 *** 09. Typoglycemia
 #+BEGIN_SRC julia
@@ -169,7 +175,7 @@ println(shuffle_sentence(str2))
 *** 10. 行数のカウント
 #+BEGIN_SRC julia
 f = open("hightemp.txt")
-println(length(readlines(f)))
+println(countlines(f))
 #+END_SRC
 
 
@@ -180,6 +186,7 @@ for line in readlines(f)
   print(replace(line,"\t", " "))
 end
 #+END_SRC
+
 
 *** 12. 1列目をcol1.txtに，2列目をcol2.txtに保存
 #+BEGIN_SRC julia
@@ -193,6 +200,7 @@ for line in readlines(f)
 end
 #+END_SRC
 
+
 *** 13. col1.txtとcol2.txtをマージ
 #+BEGIN_SRC julia
 col1 = open("col1.txt")
@@ -204,6 +212,7 @@ for line in readlines(col1)
   println(merge, join([c1,c2], "\t"))
 end
 #+END_SRC
+
 
 *** 14. 先頭からN行を出力
 $ haed -n 5 hightemp.txt
@@ -221,6 +230,52 @@ while i <= n && !eof(f)
   i += 1
 end
 #+END_SRC
+
+
+*** 15. 末尾のN行を出力
+$ tail -n 5 hightemp.txt
+と
+$ julia 15.jl 5
+は同じ
+#+BEGIN_SRC julia
+f = open(readlines, "hightemp.txt")
+n = int(ARGS[1])
+filelength = length(f)
+if n > filelength
+  n = filelength
+end
+s = filelength - n + 1
+
+for l in f[s:filelength]
+  print(l)
+end
+#+END_SRC
+
+
+*** 16. ファイルをN分割する
+#+BEGIN_SRC julia
+f = open("hightemp.txt")
+n = int(ARGS[1])
+filelength = countlines(f)
+f = seekstart(f)
+sepa = int(trunc(filelength / n))
+mod = filelength % n
+
+for i in 1:n
+  out = open(string(i)*".txt", "w")
+  lines = sepa
+  if i <= mod
+    lines = sepa + 1
+  end
+
+  for j in 1:lines
+    print(out,readline(f))
+  end
+  close(out)
+end
+
+#+END_SRC
+
 
 *** 17. 1列目の文字列の異なり
 #+BEGIN_SRC julia
