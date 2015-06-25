@@ -1,7 +1,7 @@
 * 言語処理100本ノック version Julia
   [[http://www.cl.ecei.tohoku.ac.jp/nlp100/][言語処理100本ノック]]
 
-  19までやりました(2015/06/25)
+  21までやりました(2015/06/26)
 
 ** chapter1
 *** 00.文字列の逆順
@@ -316,4 +316,57 @@ for elem in sort(collect(freq), by = tuple -> last(tuple), rev=true)
 end
 #+END_SRC
 
-** chapter2
+
+** chapter2 正規表現
+*** 20. JSONデータの読み込み
+抽出した本文は，jawiki-country.txtとして保存した．
+#+BEGIN_SRC julia
+f = open("jawiki-country.json", "r")
+
+for line in readlines(f)
+  if ismatch(r"\"title\": \"イギリス\"}", line)
+    line = replace(line,r"^\{\"text\":\s", "")
+    line = replace(line,r",\s\"title\":\s\".+\"\}$", "")
+    println(replace(line,"\\n", "\n"))
+  end
+end
+#+END_SRC
+
+
+*** 21. カテゴリ名を含む行を抽出
+#+BEGIN_SRC julia
+f = open("jawiki-country.txt", "r")
+
+for line in readlines(f)
+  if ismatch(r"\[\[Category:", line)
+    print(line)
+  end
+end
+#+END_SRC
+
+
+*** 22. カテゴリ名の抽出
+#+BEGIN_SRC julia
+f = open("jawiki-country.txt", "r")
+
+for line in readlines(f)
+  category_reg = r"\[\[Category:"
+  if ismatch(category_reg, line)
+    print(replace(line, r"\[\[Category:|(\|\*)*\]\].*", ""))
+  end
+end
+#+END_SRC
+
+
+*** 23. セクション構造
+#+BEGIN_SRC julia
+f = open("jawiki-country.txt", "r")
+
+for line in readlines(f)
+  if ismatch(r"^=+", line)
+    m = match(r"(^=+)", line)
+    level = length(m.captures[1]) - 1
+    println(replace(line, r"=|\s", "") * " $level")
+  end
+end
+#+END_SRC
