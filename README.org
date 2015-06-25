@@ -359,14 +359,16 @@ end
 
 
 *** 23. セクション構造
+内容に直接関係はないけど，matchは見つからないときnothingを返す．
+ifで無理に評価させた結果こんなコードに．どうしたらものか．．．
 #+BEGIN_SRC julia
 f = open("jawiki-country.txt", "r")
 
 for line in readlines(f)
-  if ismatch(r"^=+", line)
     m = match(r"(^=+)", line)
-    level = length(m.captures[1]) - 1
-    println(replace(line, r"=|\s", "") * " $level")
-  end
+    if !is(m, nothing)
+     level = length(m.captures[1]) - 1
+     println(replace(line, r"=|\s", "") * " $level")
+   end
 end
 #+END_SRC

@@ -1,8 +1,8 @@
 f = open("jawiki-country.txt", "r")
 
 for line in readlines(f)
-   if ismatch(r"^=+", line)
-     m = match(r"(^=+)", line)
+    m = match(r"(^=+)", line)
+    if !is(m, nothing)
      level = length(m.captures[1]) - 1
      println(replace(line, r"=|\s", "") * " $level")
    end
