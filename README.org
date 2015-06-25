@@ -372,3 +372,16 @@ for line in readlines(f)
    end
 end
 #+END_SRC
+
+
+*** 24. ファイル参照の抽出
+#+BEGIN_SRC julia
+f = open("jawiki-country.txt", "r")
+
+for line in readlines(f)
+  if ismatch(r"(\[+)*(ファイル|File)",line)
+    m = match(r"(ファイル|File)\:(.*\.\w+)\|", line)
+    println(m.captures[2])
+  end
+end
+#+END_SRC
