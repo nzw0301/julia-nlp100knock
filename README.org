@@ -1,7 +1,13 @@
 * 言語処理100本ノック version Julia
   [[http://www.cl.ecei.tohoku.ac.jp/nlp100/][言語処理100本ノック]]
 
-  24までやりました(2015/06/26)
+  26までやりました(2015/06/28)
+  
+** 環境
+
+- MacOSX(yosemite)
+- julia v0.3.*
+- emacs (ess+julia-mode)
 
 ** chapter1
 *** 00.文字列の逆順
@@ -231,7 +237,6 @@ while i <= n && !eof(f)
 end
 #+END_SRC
 
-
 *** 15. 末尾のN行を出力
 $ tail -n 5 hightemp.txt
 と
@@ -402,5 +407,18 @@ end
 println("key\tvalue")
 for k in keys(dict)
   println(k, "\t", dict[k])
+end
+#+END_SRC
+
+
+*** 26. 強調マークアップの除去
+#+BEGIN_SRC julia
+f = open("jawiki-country.txt", "r")
+
+for line in readlines(f)
+  if ismatch(r"^\|.+\s=\s",line)
+    m = match(r"^\|(.+)\s=\s(.+)",line)
+    println(m.captures[1], "\t",replace(m.captures[2], r"'{2,}", ""))
+  end
 end
 #+END_SRC
